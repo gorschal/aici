@@ -1,0 +1,30 @@
+name: "GPT-Builder"
+description: "Run a fixed prompt with configurable model/temperature/lang/framework"
+inputs:
+  model:
+    description: "OpenAI model name"
+    required: false
+    default: "gpt-3.5-turbo"
+  temperature:
+    description: "Sampling temperature"
+    required: false
+    default: "0.3"
+  language:
+    description: "Programming language"
+    required: true
+  framework:
+    description: "Framework (optional)"
+    required: false
+    default: ""
+  openai-api-key:
+    description: "OpenAI API key"
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    MODEL: ${{ inputs.model }}
+    TEMPERATURE: ${{ inputs.temperature }}
+    LANGUAGE: ${{ inputs.language }}
+    FRAMEWORK: ${{ inputs.framework }}
+    OPENAI_API_KEY: ${{ inputs.openai-api-key }}
